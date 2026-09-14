@@ -1,12 +1,13 @@
 {
     "name": "null/module-blueprint",
-    "description": "Magento Open Source 2.4.8 module cookbook. Campaigns drive admin CRUD, a catalog widget, storefront pages, REST, cron, CLI, and copyable Magento patterns.",
+    "description": "Agentic Magento Open Source 2.4.8 module template. Campaigns drive admin CRUD, a catalog widget, storefront pages, REST, cron, CLI, and copyable Magento patterns.",
     "type": "magento2-module",
+    "homepage": "https://github.com/ivanmiskic/magento2-agentic-blueprint",
     "license": "OSL-3.0",
     "keywords": [
         "magento2",
         "magento",
-        "widget",
+        "agentic",
         "module-template",
         "blueprint"
     ],

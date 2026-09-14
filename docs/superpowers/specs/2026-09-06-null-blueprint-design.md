@@ -2,7 +2,7 @@
 
 Date: 2026-09-06
 Status: implemented on branch feature/null-blueprint-2.0
-Repo: https://github.com/ivanmiskic/magento2_custom_widget
+Repo: https://github.com/ivanmiskic/magento2-agentic-blueprint
 Module: `Null_Blueprint`
 Composer: `null/module-blueprint`
 
