@@ -8,10 +8,8 @@
  */
 declare(strict_types=1);
 
-use Magento\Framework\Component\ComponentRegistrar;
-
-ComponentRegistrar::register(
-    ComponentRegistrar::MODULE,
-    'Null_Blueprint',
-    __DIR__
-);
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+<p class="blueprint-campaigns__empty">
+    <?= $escaper->escapeHtml(__('There are no active campaigns right now.')) ?>
+</p>

@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<!--
+  Copyright © 2026
+  @category Null
+  @package Null_Blueprint
+  @author Ivan Miskic
+  @license http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+  PATTERN: UI form — fieldset + dataProvider. Visual product conditions live on the widget; this form stores the serialized tree.
+  -->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">null_blueprint_campaign_form.campaign_form_data_source</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back" class="Null\Blueprint\Block\Adminhtml\Campaign\Edit\BackButton"/>
+            <button name="delete" class="Null\Blueprint\Block\Adminhtml\Campaign\Edit\DeleteButton"/>
+            <button name="save_and_continue" class="Null\Blueprint\Block\Adminhtml\Campaign\Edit\SaveAndContinueButton"/>
+            <button name="save" class="Null\Blueprint\Block\Adminhtml\Campaign\Edit\SaveButton"/>
+        </buttons>
+        <namespace>null_blueprint_campaign_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>null_blueprint_campaign_form.campaign_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="campaign_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="blueprint/campaign/save"/>
+        </settings>
+        <dataProvider class="Null\Blueprint\Model\Campaign\DataProvider" name="campaign_form_data_source">
+            <settings>
+                <requestFieldName>campaign_id</requestFieldName>
+                <primaryFieldName>campaign_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label translate="true">General</label>
+            <collapsible>false</collapsible>
+        </settings>
+        <field name="campaign_id" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>campaign_id</dataScope>
+            </settings>
+        </field>
+        <field name="title" sortOrder="10" formElement="input">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Title</label>
+            </settings>
+        </field>
+        <field name="identifier" sortOrder="20" formElement="input">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-xml-identifier" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Identifier</label>
+                <notice translate="true">Lowercase letters, digits, and hyphens. Unique.</notice>
+            </settings>
+        </field>
+        <field name="status" sortOrder="30" formElement="select">
+            <settings>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Null\Blueprint\Model\Config\Source\Status"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="store_ids" sortOrder="40" formElement="multiselect">
+            <settings>
+                <dataType>int</dataType>
+                <label translate="true">Store View</label>
+                <notice translate="true">Select Admin / All Store Views (0) to show on every store.</notice>
+            </settings>
+            <formElements>
+                <multiselect>
+                    <settings>
+                        <options class="Magento\Store\Model\System\Store"/>
+                    </settings>
+                </multiselect>
+            </formElements>
+        </field>
+        <field name="description" sortOrder="50" formElement="wysiwyg">
+            <settings>
+                <label translate="true">Description</label>
+            </settings>
+            <formElements>
+                <wysiwyg>
+                    <settings>
+                        <wysiwyg>true</wysiwyg>
+                    </settings>
+                </wysiwyg>
+            </formElements>
+        </field>
+        <field name="image" sortOrder="60" formElement="imageUploader">
+            <settings>
+                <label translate="true">Image</label>
+                <componentType>imageUploader</componentType>
+            </settings>
+            <formElements>
+                <imageUploader>
+                    <settings>
+                        <uploaderConfig>
+                            <param xsi:type="url" name="url" path="blueprint/campaign/upload"/>
+                        </uploaderConfig>
+                        <previewTmpl>Magento_Catalog/image-preview</previewTmpl>
+                        <openDialogTitle>Media Gallery</openDialogTitle>
+                        <initialMediaGalleryOpenSubpath>blueprint/campaign</initialMediaGalleryOpenSubpath>
+                        <allowedExtensions>jpg jpeg gif png webp</allowedExtensions>
+                        <maxFileSize>4194304</maxFileSize>
+                    </settings>
+                </imageUploader>
+            </formElements>
+        </field>
+    </fieldset>
+    <fieldset name="schedule">
+        <settings>
+            <label translate="true">Schedule</label>
+            <collapsible>true</collapsible>
+        </settings>
+        <field name="start_at" sortOrder="10" formElement="date">
+            <settings>
+                <dataType>datetime</dataType>
+                <label translate="true">Start at</label>
+            </settings>
+        </field>
+        <field name="end_at" sortOrder="20" formElement="date">
+            <settings>
+                <dataType>datetime</dataType>
+                <label translate="true">End at</label>
+            </settings>
+        </field>
+    </fieldset>
+    <fieldset name="products">
+        <settings>
+            <label translate="true">Products</label>
+            <collapsible>true</collapsible>
+        </settings>
+        <field name="conditions_serialized" sortOrder="10" formElement="textarea">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Product conditions</label>
+                <notice translate="true">Magento widget condition tree (same payload as Catalog Products List). Use the Campaign Products widget in Custom mode to build this visually, then paste the encoded conditions here — or leave empty and pick products only via the widget.</notice>
+            </settings>
+        </field>
+        <field name="sort_by" sortOrder="20" formElement="select">
+            <settings>
+                <dataType>select</dataType>
+                <label translate="true">Sort by</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Null\Blueprint\Model\Config\Source\SortBy"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="sort_order" sortOrder="30" formElement="select">
+            <settings>
+                <dataType>select</dataType>
+                <label translate="true">Sort order</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Null\Blueprint\Model\Config\Source\SortOrder"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="products_count" sortOrder="40" formElement="input">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                    <rule name="validate-greater-than-zero" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>number</dataType>
+                <label translate="true">Products count</label>
+            </settings>
+        </field>
+    </fieldset>
+</form>

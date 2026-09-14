@@ -1,0 +1,7 @@
+parameters:
+    level: 6
+    paths:
+        - Api/Data/CampaignInterface.php
+        - Model/CampaignVisibility.php
+        - Model/Campaign/IdentifierValidator.php
+    treatPhpDocTypesAsCertain: false

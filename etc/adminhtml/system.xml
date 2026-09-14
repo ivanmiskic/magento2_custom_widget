@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!--
+  Copyright © 2026
+  @category Null
+  @package Null_Blueprint
+  @author Ivan Miskic
+  @license http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+  PATTERN: System config — Stores → Configuration. Pair with etc/config.xml defaults and Model/Config.php.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="null" translate="label" sortOrder="400">
+            <label>Null</label>
+        </tab>
+        <section id="blueprint" translate="label" type="text" sortOrder="100" showInDefault="1"
+                 showInWebsite="1" showInStore="1">
+            <label>Blueprint</label>
+            <tab>null</tab>
+            <resource>Null_Blueprint::config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable storefront and widget output</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Admin CRUD stays available when this is No.</comment>
+                </field>
+                <field id="list_enabled" translate="label" type="select" sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable campaign list page</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="default_products_count" translate="label" type="text" sortOrder="30"
+                       showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Default products count</label>
+                    <validate>validate-digits validate-greater-than-zero</validate>
+                </field>
+                <field id="notification_email" translate="label comment" type="text" sortOrder="40"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Expiry notification email</label>
+                    <validate>validate-email</validate>
+                    <comment>Leave empty to use the general store contact. Cron sends here when a campaign expires.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

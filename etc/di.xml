@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!--
+  Copyright © 2026
+  @category Null
+  @package Null_Blueprint
+  @author Ivan Miskic
+  @license http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Null\Blueprint\Api\CampaignRepositoryInterface"
+                type="Null\Blueprint\Model\CampaignRepository"/>
+    <preference for="Null\Blueprint\Api\Data\CampaignInterface"
+                type="Null\Blueprint\Model\Campaign"/>
+    <preference for="Null\Blueprint\Api\Data\CampaignSearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults"/>
+
+    <virtualType name="Null\Blueprint\Model\ResourceModel\Campaign\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">null_blueprint_campaign</argument>
+            <argument name="resourceModel" xsi:type="string">Null\Blueprint\Model\ResourceModel\Campaign</argument>
+            <argument name="identifierName" xsi:type="string">campaign_id</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="null_blueprint_campaign_listing_data_source" xsi:type="string">
+                    Null\Blueprint\Model\ResourceModel\Campaign\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Null\Blueprint\CampaignImageUploader" type="Magento\Catalog\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">blueprint/tmp/campaign</argument>
+            <argument name="basePath" xsi:type="string">blueprint/campaign</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+                <item name="webp" xsi:type="string">webp</item>
+            </argument>
+            <argument name="allowedMimeTypes" xsi:type="array">
+                <item name="jpg" xsi:type="string">image/jpg</item>
+                <item name="jpeg" xsi:type="string">image/jpeg</item>
+                <item name="gif" xsi:type="string">image/gif</item>
+                <item name="png" xsi:type="string">image/png</item>
+                <item name="webp" xsi:type="string">image/webp</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Null\Blueprint\Controller\Adminhtml\Campaign\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Null\Blueprint\CampaignImageUploader</argument>
+        </arguments>
+    </type>
+    <type name="Null\Blueprint\Model\Campaign\ImageUploader">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Null\Blueprint\CampaignImageUploader</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="null_blueprint_campaign_seed" xsi:type="object">
+                    Null\Blueprint\Console\Command\SeedCampaignCommand
+                </item>
+                <item name="null_blueprint_campaign_export" xsi:type="object">
+                    Null\Blueprint\Console\Command\ExportCampaignCommand
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Catalog\Block\Product\AbstractProduct">
+        <plugin name="null_blueprint_campaign_badge"
+                type="Null\Blueprint\Plugin\Catalog\Block\Product\AbstractProductPlugin"/>
+    </type>
+</config>

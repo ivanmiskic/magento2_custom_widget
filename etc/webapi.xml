@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+  Copyright © 2026
+  @category Null
+  @package Null_Blueprint
+  @author Ivan Miskic
+  @license http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+  PATTERN: REST — map HTTP verbs to repository methods. ACL matches etc/acl.xml.
+  -->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/blueprint/campaigns" method="GET">
+        <service class="Null\Blueprint\Api\CampaignRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Null_Blueprint::campaign"/>
+        </resources>
+    </route>
+    <route url="/V1/blueprint/campaigns/:campaignId" method="GET">
+        <service class="Null\Blueprint\Api\CampaignRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Null_Blueprint::campaign"/>
+        </resources>
+    </route>
+    <route url="/V1/blueprint/campaigns" method="POST">
+        <service class="Null\Blueprint\Api\CampaignRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Null_Blueprint::campaign_save"/>
+        </resources>
+    </route>
+    <route url="/V1/blueprint/campaigns/:campaignId" method="PUT">
+        <service class="Null\Blueprint\Api\CampaignRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Null_Blueprint::campaign_save"/>
+        </resources>
+    </route>
+    <route url="/V1/blueprint/campaigns/:campaignId" method="DELETE">
+        <service class="Null\Blueprint\Api\CampaignRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Null_Blueprint::campaign_delete"/>
+        </resources>
+    </route>
+</routes>

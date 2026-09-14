@@ -11,8 +11,9 @@ declare(strict_types=1);
 namespace Null\Blueprint\Model\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
+use Null\Blueprint\Api\Data\CampaignInterface;
 
-class SortBy implements OptionSourceInterface
+class Status implements OptionSourceInterface
 {
     /**
      * @inheritDoc
@@ -20,10 +21,9 @@ class SortBy implements OptionSourceInterface
     public function toOptionArray(): array
     {
         return [
-            ['value' => 'name', 'label' => __('Product Name')],
-            ['value' => 'price', 'label' => __('Price')],
-            ['value' => 'position', 'label' => __('Position')],
-            ['value' => 'created_at', 'label' => __('Created At')],
+            ['value' => CampaignInterface::STATUS_DRAFT, 'label' => __('Draft')],
+            ['value' => CampaignInterface::STATUS_ACTIVE, 'label' => __('Active')],
+            ['value' => CampaignInterface::STATUS_EXPIRED, 'label' => __('Expired')],
         ];
     }
 }

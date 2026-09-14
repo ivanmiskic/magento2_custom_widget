@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!--
+  Copyright © 2026
+  @category Null
+  @package Null_Blueprint
+  @author Ivan Miskic
+  @license http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+  PATTERN: db_schema — copy this file when adding a custom entity. Prefer declarative schema over InstallSchema.
+  -->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="null_blueprint_campaign" resource="default" engine="innodb"
+           comment="Null Blueprint Campaign">
+        <column xsi:type="int" name="campaign_id" unsigned="true" nullable="false" identity="true"
+                comment="Campaign ID"/>
+        <column xsi:type="varchar" name="identifier" nullable="false" length="64"
+                comment="URL Key"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="255"
+                comment="Title"/>
+        <column xsi:type="text" name="description" nullable="true"
+                comment="WYSIWYG Description"/>
+        <column xsi:type="varchar" name="image" nullable="true" length="255"
+                comment="Image Relative Path"/>
+        <column xsi:type="smallint" name="status" unsigned="true" nullable="false" default="0"
+                comment="0 draft, 1 active, 2 expired"/>
+        <column xsi:type="datetime" name="start_at" nullable="true"
+                comment="Inclusive start"/>
+        <column xsi:type="datetime" name="end_at" nullable="true"
+                comment="Inclusive end"/>
+        <column xsi:type="mediumtext" name="conditions_serialized" nullable="true"
+                comment="Magento widget condition tree"/>
+        <column xsi:type="varchar" name="sort_by" nullable="false" length="32" default="name"
+                comment="Product sort attribute"/>
+        <column xsi:type="varchar" name="sort_order" nullable="false" length="4" default="asc"
+                comment="asc or desc"/>
+        <column xsi:type="int" name="products_count" unsigned="true" nullable="false" default="10"
+                comment="Max products to display"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP"
+                on_update="true" comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="campaign_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="NULL_BLUEPRINT_CAMPAIGN_IDENTIFIER">
+            <column name="identifier"/>
+        </constraint>
+        <index referenceId="NULL_BLUEPRINT_CAMPAIGN_STATUS" indexType="btree">
+            <column name="status"/>
+        </index>
+        <index referenceId="NULL_BLUEPRINT_CAMPAIGN_START_AT_END_AT" indexType="btree">
+            <column name="start_at"/>
+            <column name="end_at"/>
+        </index>
+    </table>
+    <table name="null_blueprint_campaign_store" resource="default" engine="innodb"
+           comment="Null Blueprint Campaign Store">
+        <column xsi:type="int" name="campaign_id" unsigned="true" nullable="false"
+                comment="Campaign ID"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false"
+                comment="Store ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="campaign_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="NULL_BLUEPRINT_CAMPAIGN_STORE_CAMPAIGN_ID"
+                    table="null_blueprint_campaign_store" column="campaign_id"
+                    referenceTable="null_blueprint_campaign" referenceColumn="campaign_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="NULL_BLUEPRINT_CAMPAIGN_STORE_STORE_ID"
+                    table="null_blueprint_campaign_store" column="store_id"
+                    referenceTable="store" referenceColumn="store_id"
+                    onDelete="CASCADE"/>
+    </table>
+</schema>

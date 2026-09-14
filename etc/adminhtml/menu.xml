@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+  Copyright © 2026
+  @category Null
+  @package Null_Blueprint
+  @author Ivan Miskic
+  @license http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Null_Blueprint::campaign"
+             title="Blueprint Campaigns"
+             module="Null_Blueprint"
+             sortOrder="80"
+             parent="Magento_Backend::marketing"
+             action="blueprint/campaign/index"
+             resource="Null_Blueprint::campaign"/>
+    </menu>
+</config>

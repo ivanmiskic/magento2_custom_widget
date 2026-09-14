@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+  Copyright © 2026
+  @category Null
+  @package Null_Blueprint
+  @author Ivan Miskic
+  @license http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <blueprint>
+            <general>
+                <enabled>1</enabled>
+                <default_products_count>10</default_products_count>
+                <notification_email/>
+                <list_enabled>1</list_enabled>
+            </general>
+        </blueprint>
+    </default>
+</config>

@@ -1,0 +1,51 @@
+<?php
+/**
+ * Copyright © 2026
+ * @category Null
+ * @package Null_Blueprint
+ * @author Ivan Miskic
+ * @license http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+declare(strict_types=1);
+
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Magento\Framework\Escaper $escaper */
+/** @var \Null\Blueprint\ViewModel\CampaignView $viewModel */
+$viewModel = $block->getData('view_model');
+?>
+<div class="blueprint-campaign">
+    <?php if ($viewModel->isEmpty()): ?>
+        <?= /* @noEscape */ $block->fetchView($block->getTemplateFile('Null_Blueprint::campaign/view/empty.phtml')) ?>
+    <?php else: ?>
+        <?php $imageUrl = $viewModel->getImageUrl(); ?>
+        <?php if ($imageUrl): ?>
+            <img class="blueprint-campaign__image"
+                 src="<?= $escaper->escapeUrl($imageUrl) ?>"
+                 alt="<?= $escaper->escapeHtmlAttr($viewModel->getTitle()) ?>"/>
+        <?php endif; ?>
+        <?php if ($viewModel->getDescription()): ?>
+            <div class="blueprint-campaign__description">
+                <?= /* @noEscape */ $viewModel->getDescription() ?>
+            </div>
+        <?php endif; ?>
+        <?php $products = $viewModel->getProductCollection(); ?>
+        <?php if ($products->getSize()): ?>
+            <div class="blueprint-campaign__products products wrapper grid products-grid">
+                <ol class="products list items product-items">
+                    <?php foreach ($products as $product): ?>
+                        <li class="item product product-item">
+                            <a class="product-item-link"
+                               href="<?= $escaper->escapeUrl($product->getProductUrl()) ?>">
+                                <?= $escaper->escapeHtml($product->getName()) ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ol>
+            </div>
+        <?php else: ?>
+            <p class="blueprint-campaign__no-products">
+                <?= $escaper->escapeHtml(__('No products are assigned to this campaign.')) ?>
+            </p>
+        <?php endif; ?>
+    <?php endif; ?>
+</div>

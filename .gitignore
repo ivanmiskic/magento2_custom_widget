@@ -1,0 +1,15 @@
+/vendor/
+/dev/qa/vendor/
+/composer.lock
+/.idea/
+/.vscode/
+/.phpunit.cache/
+/.phpunit.result.cache
+/phpstan.neon.dist.bak
+/var/
+/.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.auth.json
+auth.json

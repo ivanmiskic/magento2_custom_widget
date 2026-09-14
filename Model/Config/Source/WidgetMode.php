@@ -12,7 +12,7 @@ namespace Null\Blueprint\Model\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 
-class SortBy implements OptionSourceInterface
+class WidgetMode implements OptionSourceInterface
 {
     /**
      * @inheritDoc
@@ -20,10 +20,8 @@ class SortBy implements OptionSourceInterface
     public function toOptionArray(): array
     {
         return [
-            ['value' => 'name', 'label' => __('Product Name')],
-            ['value' => 'price', 'label' => __('Price')],
-            ['value' => 'position', 'label' => __('Position')],
-            ['value' => 'created_at', 'label' => __('Created At')],
+            ['value' => 'campaign', 'label' => __('Use an existing campaign')],
+            ['value' => 'custom', 'label' => __('Custom conditions')],
         ];
     }
 }

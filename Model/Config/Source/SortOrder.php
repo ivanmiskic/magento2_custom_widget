@@ -1,18 +1,27 @@
 <?php
-namespace Inchoo\CatalogWidget\Model\Config\Source;
+/**
+ * Copyright © 2026
+ * @category Null
+ * @package Null_Blueprint
+ * @author Ivan Miskic
+ * @license http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+declare(strict_types=1);
 
-class SortOrder implements \Magento\Framework\Option\ArrayInterface
+namespace Null\Blueprint\Model\Config\Source;
+
+use Magento\Framework\Data\OptionSourceInterface;
+
+class SortOrder implements OptionSourceInterface
 {
     /**
-     * Options getter
-     *
-     * @return array
+     * @inheritDoc
      */
-    public function toOptionArray()
+    public function toOptionArray(): array
     {
         return [
             ['value' => 'asc', 'label' => __('Ascending')],
-            ['value' => 'desc', 'label' => __('Descending')]
+            ['value' => 'desc', 'label' => __('Descending')],
         ];
     }
 }

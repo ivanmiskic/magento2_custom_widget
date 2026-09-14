@@ -1,0 +1,39 @@
+{
+    "null_blueprint_campaign": {
+        "column": {
+            "campaign_id": true,
+            "identifier": true,
+            "title": true,
+            "description": true,
+            "image": true,
+            "status": true,
+            "start_at": true,
+            "end_at": true,
+            "conditions_serialized": true,
+            "sort_by": true,
+            "sort_order": true,
+            "products_count": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "NULL_BLUEPRINT_CAMPAIGN_STATUS": true,
+            "NULL_BLUEPRINT_CAMPAIGN_START_AT_END_AT": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "NULL_BLUEPRINT_CAMPAIGN_IDENTIFIER": true
+        }
+    },
+    "null_blueprint_campaign_store": {
+        "column": {
+            "campaign_id": true,
+            "store_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "NULL_BLUEPRINT_CAMPAIGN_STORE_CAMPAIGN_ID": true,
+            "NULL_BLUEPRINT_CAMPAIGN_STORE_STORE_ID": true
+        }
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "name": "null/module-blueprint-qa",
+    "description": "QA toolchain for Null_Blueprint. Magento packages are not installed here.",
+    "require-dev": {
+        "magento/magento-coding-standard": "^33.0",
+        "phpstan/phpstan": "^1.11",
+        "phpunit/phpunit": "^10.5"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}
